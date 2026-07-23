@@ -12,6 +12,5 @@ namespace EmployeeManagementSystem.Models
         public decimal Salary { get; set; }
 
         public DateTime HireDate{ get; set; }
-
     }
 }
