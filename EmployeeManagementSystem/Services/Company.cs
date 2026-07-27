@@ -112,5 +112,69 @@ namespace EmployeeManagementSystem.Services
             return true ;
         }
 
+        public Employee? SearchEmployeeByName(string name)
+        {
+            foreach (var item in employees)
+            {
+                if(name == item.Name)
+                { 
+                    return item;
+                }
+
+            }
+            return null;
+
+        }
+        public Employee? SearchEmployeeById(int id)
+        {
+            foreach (var item in employees)
+            {
+                if (id == item.Id)
+                {
+                    return item;
+                }
+
+            }
+            return null;
+
+        }
+        public void ShowEmployeesByDepartment(int departmentId)
+        {
+            Department? department = null;
+            
+            foreach (var item in departments)
+            {
+                if(item.Key == departmentId)
+                {
+                    department = item.Value;
+                    break;
+                }
+            }
+
+            if (department == null)
+            {
+                Console.WriteLine("The Department is not found");
+                return;
+            }
+            
+            bool found =false;
+
+            Console.WriteLine($"Department: {department.Name}");
+            Console.WriteLine("--------------------------------");
+
+            foreach (Employee employee in employees)
+            {
+                if (employee.DepartmentId == departmentId)
+                {
+                    Console.WriteLine(employee);
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                Console.WriteLine("NO Employees in this Department.");
+            }
+        }
+
     }
 }
