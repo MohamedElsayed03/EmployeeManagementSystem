@@ -1,10 +1,6 @@
 ﻿using EmployeeManagementSystem.Models;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Services
 {
@@ -47,6 +43,11 @@ namespace EmployeeManagementSystem.Services
         }
         public bool AddEmployee(Employee employee)
         {
+            if(!departments.ContainsKey(employee.DepartmentId))
+            {
+                Console.WriteLine("Department does not exist.");
+                return false;
+            }
             foreach (var item in employees)
             {
 
@@ -57,11 +58,6 @@ namespace EmployeeManagementSystem.Services
                     return false;
                 }
                 
-            }
-            if(!departments.ContainsKey(employee.DepartmentId))
-            {
-                Console.WriteLine("Department does not exist.");
-                return false;
             }
             onboardingQueue.Enqueue(employee);
             actionHistory.Push($"Employee '{employee.Name}' added to onboarding queue.");
