@@ -1,5 +1,6 @@
 ﻿using EmployeeManagementSystem.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -191,6 +192,26 @@ namespace EmployeeManagementSystem.Services
 
             return (TotalSalary / employees.Count);
 
+        }
+        public void DepartmentReport()
+        {
+            Console.WriteLine("Department Report");
+            Console.WriteLine("------------------------\n");
+            foreach (var department in departments)
+            {            
+                int counter = 0;
+                foreach (var item in employees)
+                {
+                    if (item.DepartmentId == department.Key)
+                    {
+                        counter++;
+                    }
+                }
+
+                Console.WriteLine($"DepartmentName : {department.Value.Name}\n" +
+                    $"Employee Count : {counter}\n");
+            }
+            Console.WriteLine("\n------------------------\n");
         }
 
     }
