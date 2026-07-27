@@ -19,5 +19,69 @@ namespace EmployeeManagementSystem.Services
         
         private readonly HashSet<string> skills = new HashSet<string>();
 
+
+
+
+        public bool AddDepartment(Department department)
+        {
+            if(departments.ContainsKey(department.Id))
+            {
+                Console.WriteLine("This Id is already exist.");
+                return false;
+            }
+
+            departments.Add(department.Id, department);
+            actionHistory.Push($"Department '{department.Name}' added.");
+
+            return true;
+        }
+
+        public void ShowDepartments()
+        {
+            foreach (var item in departments)
+            {
+                Console.WriteLine($"[ Id : {item.Value.Id} --> Name : {item.Value.Name} ]");
+                
+            }
+        }
+        public bool AddEmployee(Employee employee)
+        {
+            foreach (var item in employees)
+            {
+                
+                
+                if (employee.Id == item.Id)
+                    Console.WriteLine("Employee already exists.");
+                    return false;
+            }
+            onboardingQueue.Enqueue(employee);
+            actionHistory.Push($"Employee '{employee.Name}' added to onboarding queue.");
+
+            Console.WriteLine("Employee added to onboarding queue successfully.");
+
+            return true;
+                           
+        }
+   
+        public void ProcessOnboarding()
+        {
+            if(onboardingQueue.Count == 0)
+            {
+                Console.WriteLine("No employees waiting for onboarding.");
+                return;
+            }
+
+            Employee employee = onboardingQueue.Dequeue();
+
+            employees.Add(employee);
+         
+            actionHistory.Push($"The Employee {employee.Name} completed onboarding.");
+            
+            Console.WriteLine("The Employee Added successfully");
+
+        }
+
+
+
     }
 }
