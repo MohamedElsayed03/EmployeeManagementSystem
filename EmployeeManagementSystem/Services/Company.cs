@@ -214,6 +214,22 @@ namespace EmployeeManagementSystem.Services
             Console.WriteLine("\n-------------------------\n");      
 
         }
+        public void ShowActionHistory()
+        {
+            if(actionHistory.Count ==0)
+            {
+                Console.WriteLine("No Action Found.");
+                return;
+            }
+            Console.WriteLine("Action History");
+            Console.WriteLine("\n-------------------------\n");
+            foreach (var action in actionHistory)
+            {
+                Console.WriteLine(action);
+
+            }
+            Console.WriteLine("\n-------------------------\n");
+        }
 
     }
 }
