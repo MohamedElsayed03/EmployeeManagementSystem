@@ -49,11 +49,19 @@ namespace EmployeeManagementSystem.Services
         {
             foreach (var item in employees)
             {
-                
-                
+
+
                 if (employee.Id == item.Id)
+                {
                     Console.WriteLine("Employee already exists.");
                     return false;
+                }
+                
+            }
+            if(!departments.ContainsKey(employee.DepartmentId))
+            {
+                Console.WriteLine("Department does not exist.");
+                return false;
             }
             onboardingQueue.Enqueue(employee);
             actionHistory.Push($"Employee '{employee.Name}' added to onboarding queue.");
@@ -231,5 +239,22 @@ namespace EmployeeManagementSystem.Services
             Console.WriteLine("\n-------------------------\n");
         }
 
+        public void ShowAllSkills()
+        {
+            if(skills.Count ==0)
+            {
+                Console.WriteLine("No Skills Found.");
+                return;
+            }
+            Console.WriteLine("All Skills");
+            Console.WriteLine("\n--------------\n");
+
+            foreach (var skill in skills)
+            {
+                Console.WriteLine(skill);
+            }
+            Console.WriteLine("\n--------------\n");
+
+        }
     }
 }
