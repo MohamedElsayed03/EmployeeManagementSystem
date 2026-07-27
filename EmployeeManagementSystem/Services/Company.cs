@@ -211,7 +211,9 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine($"DepartmentName : {department.Value.Name}\n" +
                     $"Employee Count : {counter}\n");
             }
-            Console.WriteLine("\n------------------------\n");
+            Console.WriteLine("\n------------------------\n");           
+
+
         }
 
     }
