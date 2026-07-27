@@ -196,7 +196,7 @@ namespace EmployeeManagementSystem.Services
         public void DepartmentReport()
         {
             Console.WriteLine("Department Report");
-            Console.WriteLine("------------------------\n");
+            Console.WriteLine("-------------------------\n");
             foreach (var department in departments)
             {            
                 int counter = 0;
@@ -211,8 +211,7 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine($"DepartmentName : {department.Value.Name}\n" +
                     $"Employee Count : {counter}\n");
             }
-            Console.WriteLine("\n------------------------\n");           
-
+            Console.WriteLine("\n-------------------------\n");      
 
         }
 
