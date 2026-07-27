@@ -175,6 +175,23 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine("NO Employees in this Department.");
             }
         }
+        public decimal CalculateAverageSalary()
+        {
+            decimal TotalSalary =0m;
+            
+            if (employees.Count == 0)
+            {
+                return 0;
+            }
+
+            foreach (var employee in employees)
+            {
+                TotalSalary += employee.Salary;                       
+            }
+
+            return (TotalSalary / employees.Count);
+
+        }
 
     }
 }
