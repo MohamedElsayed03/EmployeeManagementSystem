@@ -12,5 +12,10 @@ namespace EmployeeManagementSystem.Models
         public decimal Salary { get; set; }
 
         public DateTime HireDate{ get; set; }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}, Department Id: {DepartmentId}, Salary: {Salary}, Hire Date: {HireDate:d}";
+        }
     }
 }
