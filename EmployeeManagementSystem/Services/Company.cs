@@ -81,7 +81,36 @@ namespace EmployeeManagementSystem.Services
 
         }
 
+        public bool RecordSkill(int employeeId, string skill)
+        {
+            Employee? employee1 = null;
+            foreach (var item in employees)
+            {
+                if (employeeId ==item.Id)
+                {
 
+                    employee1 = item;
+                    break;
+                }
+
+            }
+            if (employee1 == null)
+            {
+                Console.WriteLine("Employee not found.");
+                return false;
+            }
+
+
+            if (!skills.Add(skill))
+            {
+                Console.WriteLine("Can't Add This Skill ,Becouse it's already existed");
+                return false;
+            }
+        
+            actionHistory.Push($"Skill '{skill}' recorded for employee '{employee1.Name}'.");
+            Console.WriteLine("The Skill Added successfully");
+            return true ;
+        }
 
     }
 }
