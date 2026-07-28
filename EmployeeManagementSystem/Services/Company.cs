@@ -26,7 +26,7 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine("This Id is already exist.");
                 return false;
             }
-
+           
             departments.Add(department.Id, department);
             actionHistory.Push($"Department '{department.Name}' added.");
 
@@ -62,7 +62,6 @@ namespace EmployeeManagementSystem.Services
             onboardingQueue.Enqueue(employee);
             actionHistory.Push($"Employee '{employee.Name}' added to onboarding queue.");
 
-            Console.WriteLine("Employee added to onboarding queue successfully.");
 
             return true;
                            
@@ -82,7 +81,6 @@ namespace EmployeeManagementSystem.Services
          
             actionHistory.Push($"The Employee {employee.Name} completed onboarding.");
             
-            Console.WriteLine("The Employee Added successfully");
 
         }
 
@@ -113,7 +111,6 @@ namespace EmployeeManagementSystem.Services
             }
         
             actionHistory.Push($"Skill '{skill}' recorded for employee '{employee1.Name}'.");
-            Console.WriteLine("The Skill Added successfully");
             return true ;
         }
 
@@ -198,9 +195,7 @@ namespace EmployeeManagementSystem.Services
 
         }
         public void DepartmentReport()
-        {
-            Console.WriteLine("Department Report");
-            Console.WriteLine("-------------------------\n");
+        {          
             foreach (var department in departments)
             {            
                 int counter = 0;
@@ -215,8 +210,6 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine($"DepartmentName : {department.Value.Name}\n" +
                     $"Employee Count : {counter}\n");
             }
-            Console.WriteLine("\n-------------------------\n");      
-
         }
         public void ShowActionHistory()
         {
@@ -224,15 +217,12 @@ namespace EmployeeManagementSystem.Services
             {
                 Console.WriteLine("No Action Found.");
                 return;
-            }
-            Console.WriteLine("Action History");
-            Console.WriteLine("\n-------------------------\n");
+            }          
             foreach (var action in actionHistory)
             {
                 Console.WriteLine(action);
 
-            }
-            Console.WriteLine("\n-------------------------\n");
+            }          
         }
 
         public void ShowAllSkills()
@@ -242,15 +232,10 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine("No Skills Found.");
                 return;
             }
-            Console.WriteLine("All Skills");
-            Console.WriteLine("\n--------------\n");
-
             foreach (var skill in skills)
             {
                 Console.WriteLine(skill);
-            }
-            Console.WriteLine("\n--------------\n");
-
+            }         
         }
         public void SeedData()
         {
@@ -266,9 +251,16 @@ namespace EmployeeManagementSystem.Services
                 Id = 2,
                 Name = "Angular"
             };
+            Department Mobile = new Department()
+            {
+                Id = 3,
+                Name = "Flutter"
+            };
+
 
             AddDepartment(BackEnd);
             AddDepartment(Frontend);
+            AddDepartment(Mobile);
 
             Employee employee1 = new Employee()
             {
@@ -297,11 +289,22 @@ namespace EmployeeManagementSystem.Services
                 Salary = 28000m
 
             };
+            Employee employee4 = new Employee()
+            {
+                Name = "Mahmoud",
+                Id = 4,
+                DepartmentId = 3,
+                HireDate = DateTime.Now.AddYears(-1),
+                Salary = 21000m
+
+            };
 
             AddEmployee(employee1);
             AddEmployee(employee2);
             AddEmployee(employee3);
+            AddEmployee(employee4);
 
+            ProcessOnboarding();
             ProcessOnboarding();
             ProcessOnboarding();
             ProcessOnboarding();
@@ -309,6 +312,7 @@ namespace EmployeeManagementSystem.Services
             RecordSkill(1, "C#");
             RecordSkill(2, "JavaScript");
             RecordSkill(3, "ASP.NET CORE");
+            RecordSkill(4, "HTML");
 
         }
     }

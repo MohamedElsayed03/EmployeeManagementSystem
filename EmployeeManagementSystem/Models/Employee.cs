@@ -4,6 +4,16 @@ namespace EmployeeManagementSystem.Models
 {
     public class Employee
     {
+        public Employee(int id, int departmentId, string name, decimal salary, DateTime hireDate)
+        {
+            Id = id;
+            DepartmentId = departmentId;
+            Name = name;
+            Salary = salary;
+            HireDate = hireDate;
+        }
+
+        public Employee() { }
         public int Id { get; set; }
         public int DepartmentId { get; set; }
 
