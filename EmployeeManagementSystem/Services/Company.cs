@@ -252,5 +252,64 @@ namespace EmployeeManagementSystem.Services
             Console.WriteLine("\n--------------\n");
 
         }
+        public void SeedData()
+        {
+
+            Department BackEnd = new Department()
+            {
+                Id = 1,
+                Name = ".Net"
+            };
+
+            Department Frontend = new Department()
+            {
+                Id = 2,
+                Name = "Angular"
+            };
+
+            AddDepartment(BackEnd);
+            AddDepartment(Frontend);
+
+            Employee employee1 = new Employee()
+            {
+                Name = "Mohamed",
+                Id = 1,
+                DepartmentId = 1,
+                HireDate = DateTime.Now.AddYears(-1),
+                Salary = 18000m
+
+            };
+            Employee employee2 = new Employee()
+            {
+                Name = "Saleh",
+                Id = 2,
+                DepartmentId = 2,
+                HireDate = DateTime.Now,
+                Salary = 20000m
+
+            };
+            Employee employee3 = new Employee()
+            {
+                Name = "Eslam",
+                Id = 3,
+                DepartmentId = 1,
+                HireDate = DateTime.Now.AddYears(-3),
+                Salary = 28000m
+
+            };
+
+            AddEmployee(employee1);
+            AddEmployee(employee2);
+            AddEmployee(employee3);
+
+            ProcessOnboarding();
+            ProcessOnboarding();
+            ProcessOnboarding();
+
+            RecordSkill(1, "C#");
+            RecordSkill(2, "JavaScript");
+            RecordSkill(1, "ASP.NET CORE");
+
+        }
     }
 }
