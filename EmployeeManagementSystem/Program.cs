@@ -215,7 +215,7 @@ namespace EmployeeManagementSystem
           bool add =  company.AddDepartment(department);
             if(add)
             {
-                Console.WriteLine($"The Department {id} --> {name} added successfully");
+                Console.WriteLine($"The Department [ Id :{id} --> Name : {name} ] added successfully");
             }
 
         }
