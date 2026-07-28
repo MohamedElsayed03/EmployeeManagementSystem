@@ -308,7 +308,7 @@ namespace EmployeeManagementSystem.Services
 
             RecordSkill(1, "C#");
             RecordSkill(2, "JavaScript");
-            RecordSkill(1, "ASP.NET CORE");
+            RecordSkill(3, "ASP.NET CORE");
 
         }
     }
