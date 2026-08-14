@@ -14,5 +14,7 @@ namespace EmployeeManagementSystem.Common
 
         public T? Data { get; set; }
 
+        SuccessSuccessSuccess
+
     }
 }

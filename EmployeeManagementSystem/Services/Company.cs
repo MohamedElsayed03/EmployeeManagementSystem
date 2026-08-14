@@ -1,4 +1,5 @@
-﻿using EmployeeManagementSystem.Models;
+﻿using EmployeeManagementSystem.Common;
+using EmployeeManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 
@@ -41,12 +42,12 @@ namespace EmployeeManagementSystem.Services
                 
             }
         }
-        public bool AddEmployee(Employee employee)
+        public Result<Employee> AddEmployee(Employee employee)
         {
             if(!departments.ContainsKey(employee.DepartmentId))
             {
                 Console.WriteLine("Department does not exist.");
-                return false;
+                                
             }
             foreach (var item in employees)
             {
