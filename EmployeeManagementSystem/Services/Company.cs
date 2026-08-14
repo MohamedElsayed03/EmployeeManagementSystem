@@ -59,6 +59,14 @@ namespace EmployeeManagementSystem.Services
                 }
                 
             }
+            foreach (var item in onboardingQueue)
+            {
+                if (employee.Id == item.Id)
+                {
+                    Console.WriteLine("Employee is already in onboarding queue. ض");
+                    return false;
+                }
+            }
             onboardingQueue.Enqueue(employee);
             actionHistory.Push($"Employee '{employee.Name}' added to onboarding queue.");
 
@@ -74,7 +82,7 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine("No employees waiting for onboarding.");
                 return;
             }
-
+          
             Employee employee = onboardingQueue.Dequeue();
 
             employees.Add(employee);
