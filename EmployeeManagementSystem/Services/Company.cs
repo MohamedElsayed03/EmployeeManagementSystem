@@ -46,8 +46,7 @@ namespace EmployeeManagementSystem.Services
         {
             if(!departments.ContainsKey(employee.DepartmentId))
             {
-                Console.WriteLine("Department does not exist.");
-                                
+                return Result<Employee>.Fail("Department does not exist.");
             }
             foreach (var item in employees)
             {
@@ -55,24 +54,22 @@ namespace EmployeeManagementSystem.Services
 
                 if (employee.Id == item.Id)
                 {
-                    Console.WriteLine("Employee already exists.");
-                    return false;
+                   return Result<Employee>.Fail("Employee already exists.");
                 }
                 
             }
             foreach (var item in onboardingQueue)
             {
                 if (employee.Id == item.Id)
-                {
-                    Console.WriteLine("Employee is already in onboarding queue. ض");
-                    return false;
+                {                 
+                    return Result<Employee>.Fail("Employee is already in onboarding queue. ض");
                 }
             }
             onboardingQueue.Enqueue(employee);
             actionHistory.Push($"Employee '{employee.Name}' added to onboarding queue.");
 
 
-            return true;
+            return Result<Employee>.Ok(employee, "Employee Add successfully");
                            
         }
    
