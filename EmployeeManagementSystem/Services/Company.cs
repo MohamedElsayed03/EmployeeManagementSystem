@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.Models;
 using System;
 using System.Collections.Generic;
+using EmployeeManagementSystem.Events;
 
 namespace EmployeeManagementSystem.Services
 {
@@ -17,21 +18,21 @@ namespace EmployeeManagementSystem.Services
         
         private readonly HashSet<string> skills = new HashSet<string>();
 
+        public event EventHandler<EmployeeEventArgs> EmployeeOnboarded;
+        public event EventHandler<EmployeeEventArgs> EmployeePromoted;
 
 
-
-        public bool AddDepartment(Department department)
+        public Result<Department> AddDepartment(Department department)
         {
             if(departments.ContainsKey(department.Id))
             {
-                Console.WriteLine("This Id is already exist.");
-                return false;
+                return Result<Department>.Fail("This Id is already exist.");
             }
            
             departments.Add(department.Id, department);
             actionHistory.Push($"Department '{department.Name}' added.");
 
-            return true;
+            return Result<Department>.Ok(department, "Departmnet Add successfully.");
         }
 
         public void ShowDepartments()
@@ -87,7 +88,36 @@ namespace EmployeeManagementSystem.Services
          
             actionHistory.Push($"The Employee {employee.Name} completed onboarding.");
             
+            EmployeeOnboarded?.Invoke(this,new EmployeeEventArgs(employee));
+        }
+        public void PromoteEmployee(int employeeid)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if(employees[i].Id == employeeid)
+                {
+                    if (employees[i] is Manager)
+                    {
+                        Console.WriteLine("Already Manager");
+                        return;
+                    }
+                    Employee employee = employees[i];
 
+                    Manager manager = new Manager();
+
+                    manager.Id = employeeid;
+                    manager.Name = employee.Name;
+                    manager.Salary = employee.Salary;
+                    manager.DepartmentId = employee.DepartmentId;
+                    manager.HireDate = employee.HireDate;
+                    employees[i] = manager;
+
+                    EmployeePromoted?.Invoke(this, new EmployeeEventArgs(manager));
+
+                    return;
+                }                
+            }
+            Console.WriteLine("Employee not found");
         }
 
         public bool RecordSkill(int employeeId, string skill)
