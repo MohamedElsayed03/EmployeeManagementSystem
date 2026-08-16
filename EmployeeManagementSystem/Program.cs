@@ -1,4 +1,6 @@
-﻿using EmployeeManagementSystem.Models;
+﻿using EmployeeManagementSystem.Common;
+using EmployeeManagementSystem.Events;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.Services;
 using System.Diagnostics;
 
@@ -11,7 +13,8 @@ namespace EmployeeManagementSystem
 
             Company company = new Company();        
             company.SeedData();
-
+            company.EmployeeOnboarded += OnEmployeeOnboarded;
+            company.EmployeePromoted += OnEmployeePromoted;
             while (true)
             {
                 Console.Clear();
@@ -100,6 +103,14 @@ namespace EmployeeManagementSystem
             Console.WriteLine("_________________________________");
             Console.WriteLine("Choose an Option :");
 
+        }
+        static void OnEmployeeOnboarded(object sender, EmployeeEventArgs e)
+        {
+            Console.WriteLine($"Employee {e.Employee.Name} completed onboarding.");
+        }
+        static void OnEmployeePromoted(object sender, EmployeeEventArgs e)
+        {
+            Console.WriteLine($"Employee {e.Employee.Name} was promoted to Manager.");
         }
         private static void HandleAddEmployee(Company company)
         {
@@ -212,8 +223,8 @@ namespace EmployeeManagementSystem
 
             Department department = new Department() { Name  = name, Id = id };
 
-          bool add =  company.AddDepartment(department);
-            if(add)
+          Result<Department> add =  company.AddDepartment(department);
+            if(add.Success)
             {
                 Console.WriteLine($"The Department [ Id :{id} --> Name : {name} ] added successfully");
             }
