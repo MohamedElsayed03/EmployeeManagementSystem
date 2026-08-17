@@ -113,6 +113,8 @@ namespace EmployeeManagementSystem.Services
                     manager.HireDate = employee.HireDate;
                     employees[i] = manager;
 
+                    actionHistory.Push( $"Employee '{employee.Name}' was promoted to Manager.");
+
                     EmployeePromoted?.Invoke(this, new EmployeeEventArgs(manager));
 
                     return;
