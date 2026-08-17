@@ -130,16 +130,20 @@ namespace EmployeeManagementSystem
 
             Employee employee = new Employee(id,departmentid,name ,salary,DateTime.Now);
             
-            company.AddEmployee(employee);
-            Console.WriteLine("Employee added to onboarding queue successfully.");
-
+           Result<Employee> add = company.AddEmployee(employee);
+            if (add.Success)
+            {
+                Console.WriteLine($"Employee Id -> {id},Name -> {name} added to onboarding queue successfully.");
+            }
+            else 
+            {
+                Console.WriteLine(add.Message);
+            }
 
         }
         private static void HandelProcessOnboarding(Company company)
         {
             company.ProcessOnboarding();
-            Console.WriteLine("The Employee Added successfully");
-
         }
         private static void HandelSearchEmployeeByName(Company company)
         {
@@ -228,6 +232,18 @@ namespace EmployeeManagementSystem
             {
                 Console.WriteLine($"The Department [ Id :{id} --> Name : {name} ] added successfully");
             }
+            else
+            {
+                Console.WriteLine(add.Message);
+            }
+
+        }
+        private static void HandlePromoteEmployee(Company company)
+        {
+            Console.WriteLine("Enter Employee Id :");
+            int employeeid = int.Parse(Console.ReadLine());
+
+            company.PromoteEmployee(employeeid);
 
         }
     }
