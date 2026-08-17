@@ -3,6 +3,7 @@ using EmployeeManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using EmployeeManagementSystem.Events;
+using EmployeeManagementSystem.Delegates;
 
 namespace EmployeeManagementSystem.Services
 {
@@ -119,7 +120,22 @@ namespace EmployeeManagementSystem.Services
             }
             Console.WriteLine("Employee not found");
         }
+        public List<Employee> FilterEmployees(EmployeeFilter filter)
+        {
+            List<Employee> list = new List<Employee>();
 
+            foreach (var employee in employees)
+            {
+                if(filter(employee))
+                {
+                   list.Add(employee);
+                }
+                
+            }
+            return list;
+             
+        }
+         
         public bool RecordSkill(int employeeId, string skill)
         {
             Employee? employee1 = null;

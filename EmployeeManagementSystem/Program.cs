@@ -66,6 +66,9 @@ namespace EmployeeManagementSystem
                         case 13:
                             HandlePromoteEmployee(company);
                             break;
+                        case 14:
+                            HandleFilterEmployees(company);
+                            break;
                         case 0:
                             Environment.Exit(0);
                             break;
@@ -102,6 +105,7 @@ namespace EmployeeManagementSystem
             Console.WriteLine("11- Record Skill");
             Console.WriteLine("12- Show All Skills");
             Console.WriteLine("13- Promote Employee");
+            Console.WriteLine("14- Filter Employees");
             Console.WriteLine();
             Console.WriteLine("0- exit");
             Console.WriteLine("_________________________________");
@@ -144,6 +148,40 @@ namespace EmployeeManagementSystem
                 Console.WriteLine(add.Message);
             }
 
+        }
+        private static void HandleFilterEmployees(Company company)
+        {
+            List<Employee> managers = company.FilterEmployees(emp => emp is Manager);
+           
+            List<Employee> highSalary = company.FilterEmployees(emp => emp.Salary > 10000);
+
+            Console.WriteLine("\n-------Managers-----");
+            if (managers.Count > 0)
+            {
+                foreach (Employee emp in managers)
+                {
+                    Console.WriteLine(emp);
+                }
+            }
+            else
+            {
+                Console.WriteLine("NO Managers found");
+            }
+
+            Console.WriteLine("\n---- Employee With Salary > 10,000 ---");
+            if(highSalary.Count > 0)
+            {
+                foreach(Employee emp in highSalary)
+                {
+                    Console.WriteLine(emp);
+
+                }
+            }
+            else
+            {
+                    Console.WriteLine("NO Employees founded have Salary more than 10,000");
+
+            }
         }
         private static void HandelProcessOnboarding(Company company)
         {
