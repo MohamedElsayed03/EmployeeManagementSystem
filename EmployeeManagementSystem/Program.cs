@@ -63,6 +63,9 @@ namespace EmployeeManagementSystem
                         case 12:
                             HandleShowAllSkills(company);
                             break;
+                        case 13:
+                            HandlePromoteEmployee(company);
+                            break;
                         case 0:
                             Environment.Exit(0);
                             break;
@@ -98,6 +101,7 @@ namespace EmployeeManagementSystem
             Console.WriteLine("10- Show Action History");
             Console.WriteLine("11- Record Skill");
             Console.WriteLine("12- Show All Skills");
+            Console.WriteLine("13- Promote Employee");
             Console.WriteLine();
             Console.WriteLine("0- exit");
             Console.WriteLine("_________________________________");
