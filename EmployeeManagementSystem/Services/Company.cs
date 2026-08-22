@@ -157,13 +157,18 @@ namespace EmployeeManagementSystem.Services
                 return false;
             }
 
+            if(!employee1.AddSkill(skill))
+            {
+                Console.WriteLine("Can't add This Skill To The Employee ,Becouse Already has it.");
+                return false;
+            }
 
             if (!skills.Add(skill))
             {
                 Console.WriteLine("Can't Add This Skill ,Becouse it's already existed");
                 return false;
             }
-        
+
             actionHistory.Push($"Skill '{skill}' recorded for employee '{employee1.Name}'.");
             return true ;
         }

@@ -256,8 +256,15 @@ namespace EmployeeManagementSystem
             Console.WriteLine("Enter Skill :");
             string skill = Console.ReadLine()?? string.Empty;
            
-            company.RecordSkill(employeeid,skill);
-            Console.WriteLine("The Skill Added successfully");
+           bool success = company.RecordSkill(employeeid,skill);
+            if (success)
+            {
+                Console.WriteLine("The Skill Added successfully");
+            }
+            else
+            {
+                Console.WriteLine("The Skill didn't Add");
+            }
         }
         private static void HandleAddDepartment(Company company)
         {

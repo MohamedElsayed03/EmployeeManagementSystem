@@ -4,6 +4,8 @@ namespace EmployeeManagementSystem.Models
 {
     public class Employee
     {
+        private readonly HashSet<string> Skills = new HashSet<string>();
+
         public Employee(int id, int departmentId, string name, decimal salary, DateTime hireDate)
         {
             Id = id;
@@ -22,6 +24,11 @@ namespace EmployeeManagementSystem.Models
         public decimal Salary { get; set; }
 
         public DateTime HireDate{ get; set; }
+
+        public bool AddSkill(string skill)
+        {
+           return Skills.Add(skill);
+        }
 
         public override string ToString()
         {
