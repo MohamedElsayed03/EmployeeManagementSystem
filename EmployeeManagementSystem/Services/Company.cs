@@ -122,6 +122,93 @@ namespace EmployeeManagementSystem.Services
             }
             Console.WriteLine("Employee not found");
         }
+
+     
+        public void  AssignEmployeeToManager(int employeeId, int managerId)
+        {
+            Employee? employee = null;
+
+            Manager? manager = null;
+            
+            foreach (var item in employees)
+            {
+                if(item.Id == employeeId)
+                {
+                    employee = item;
+                    break;
+                }                
+            }
+
+            if(employee == null)
+            {
+                Console.WriteLine("The Employee not found");
+                return;
+            }
+
+
+            foreach (var item in employees)
+            {
+                if(item.Id == managerId && item is Manager)
+                {
+                    manager= (Manager)item;
+                    break;
+                }                
+            }
+
+            if (manager == null)
+            {
+                Console.WriteLine("The Manager Not Found");
+                return;
+            }
+
+            foreach (var item in manager.TeamMembers)
+            {
+                if(item.Id == employee.Id)
+                {
+                    Console.WriteLine("The Employee is Already exist In The TeamMember");
+                    return;
+                }                
+            }
+
+            manager.TeamMembers.Add( employee);
+            Console.WriteLine("The Employee Added successfully To The TeamMember");
+        }
+        public void ViewManagerTeam(int managerid)
+        {
+            Manager? manager = null; 
+            foreach (var item in employees)
+            {
+                if (item.Id == managerid && item is Manager)
+                {
+                    manager = (Manager)item;
+                 break ;   
+                }
+                
+            }
+            if (manager == null)
+            {
+                Console.WriteLine("Manager not found.");
+                return;
+            }
+
+            if (manager.TeamMembers.Count == 0)
+            {
+                Console.WriteLine("NO TeamMember");
+                return;
+            }
+            Console.WriteLine("------------------------------");
+            Console.WriteLine($"The Manager : {manager}");
+            Console.WriteLine($"\nTeamMember : ");
+
+            foreach (var item in manager.TeamMembers)
+            {
+                
+                Console.WriteLine($"{item}");
+                
+            }
+            Console.WriteLine("------------------------------");
+
+        }
         public List<Employee> FilterEmployees(EmployeeFilter filter)
         {
             List<Employee> list = new List<Employee>();

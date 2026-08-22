@@ -68,6 +68,12 @@ namespace EmployeeManagementSystem
                             break;
                         case 14:
                             HandleFilterEmployees(company);
+                            break;                            
+                        case 15:
+                            HandleAssignEmployeeToManager(company);
+                            break;                            
+                        case 16:
+                            HandleViewManagerTeam(company);
                             break;
                         case 0:
                             Environment.Exit(0);
@@ -104,8 +110,10 @@ namespace EmployeeManagementSystem
             Console.WriteLine("10- Show Action History");
             Console.WriteLine("11- Record Skill");
             Console.WriteLine("12- Show All Skills");
-            Console.WriteLine("13- Promote Employee");
-            Console.WriteLine("14- Filter Employees");
+            Console.WriteLine("13- Promote Employee"); 
+            Console.WriteLine("14- Filter Employees"); 
+            Console.WriteLine("15- AssignEmployeeToManager");
+            Console.WriteLine("16- ViewManagerTeam");
             Console.WriteLine();
             Console.WriteLine("0- exit");
             Console.WriteLine("_________________________________");
@@ -294,6 +302,34 @@ namespace EmployeeManagementSystem
 
             company.PromoteEmployee(employeeid);
 
+        }
+        private static void HandleAssignEmployeeToManager(Company company)
+        {
+
+            Console.WriteLine("Enter Employee Id :");
+            if (!int.TryParse(Console.ReadLine(), out int employeeId))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
+            Console.WriteLine("Enter Manager Id :");
+            if (!int.TryParse(Console.ReadLine(), out int mangerId))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
+            company.AssignEmployeeToManager(employeeId,mangerId);
+        }
+        private static void HandleViewManagerTeam(Company company)
+        {
+
+            Console.WriteLine("Enter Manager Id :");
+            if (!int.TryParse(Console.ReadLine(), out int mangerId))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
+            company.ViewManagerTeam( mangerId);
         }
     }
 }
