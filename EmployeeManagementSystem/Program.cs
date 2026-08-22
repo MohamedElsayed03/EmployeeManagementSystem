@@ -75,6 +75,9 @@ namespace EmployeeManagementSystem
                         case 16:
                             HandleViewManagerTeam(company);
                             break;
+                        case 17:
+                            HandleShowEmployeeSkills(company);
+                            break;
                         case 0:
                             Environment.Exit(0);
                             break;
@@ -109,11 +112,12 @@ namespace EmployeeManagementSystem
             Console.WriteLine("9- Department Report");
             Console.WriteLine("10- Show Action History");
             Console.WriteLine("11- Record Skill");
-            Console.WriteLine("12- Show All Skills");
+            Console.WriteLine("12- Show Company Skills");
             Console.WriteLine("13- Promote Employee"); 
             Console.WriteLine("14- Filter Employees"); 
             Console.WriteLine("15- AssignEmployeeToManager");
             Console.WriteLine("16- ViewManagerTeam");
+            Console.WriteLine("17- Show Employee Skills");
             Console.WriteLine();
             Console.WriteLine("0- exit");
             Console.WriteLine("_________________________________");
@@ -134,10 +138,18 @@ namespace EmployeeManagementSystem
             var name = Console.ReadLine() ?? string.Empty;
 
             Console.WriteLine("Id : ");
-            int id = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
 
             Console.WriteLine("Department Id : ");
-            int departmentid = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int departmentid))
+            {
+                Console.WriteLine("Invalid Department Id");
+                return;
+            }
 
             Console.WriteLine("Salary :");
             decimal salary = decimal.Parse(Console.ReadLine());
@@ -212,7 +224,11 @@ namespace EmployeeManagementSystem
         private static void HandelSearchEmployeeById(Company company)
         {
             Console.WriteLine("Enter The Id : ");
-            int id = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
             Employee? employee = company.SearchEmployeeById(id);
 
             if (employee == null)
@@ -226,7 +242,11 @@ namespace EmployeeManagementSystem
         private static void HandelShowEmployeesByDepartment(Company company)
         {
             Console.WriteLine("Enter Department Id : ");
-            int departmentid = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int departmentid))
+            {
+                Console.WriteLine("Invalid Department Id");
+                return;
+            }
             company.ShowEmployeesByDepartment(departmentid);
         }
         private static void HandelCalculateAverageSalary(Company company)
@@ -256,10 +276,21 @@ namespace EmployeeManagementSystem
             company.ShowAllSkills();
             Console.WriteLine("--------------\n");
         }
+        private static void HandleShowEmployeeSkills(Company company)
+        {
+            Console.WriteLine("Employee Skills");
+            Console.WriteLine("--------------\n");
+            company.ShowEmployeeSkills();
+            Console.WriteLine("--------------\n");
+        }
         private static void HandleRecordSkill(Company company)
         {
-            Console.WriteLine("Enter Employee Id :"); 
-            int employeeid = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Employee Id :");
+            if (!int.TryParse(Console.ReadLine(), out int employeeid))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
 
             Console.WriteLine("Enter Skill :");
             string skill = Console.ReadLine()?? string.Empty;
@@ -280,7 +311,11 @@ namespace EmployeeManagementSystem
             var name = Console.ReadLine();
 
             Console.WriteLine("Enter The Id OF the Dpartment : ");
-            int id  = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Invalid Dpartment Id");
+                return;
+            }
 
             Department department = new Department() { Name  = name, Id = id };
 
@@ -298,8 +333,11 @@ namespace EmployeeManagementSystem
         private static void HandlePromoteEmployee(Company company)
         {
             Console.WriteLine("Enter Employee Id :");
-            int employeeid = int.Parse(Console.ReadLine());
-
+            if (!int.TryParse(Console.ReadLine(), out int employeeid))
+            {
+                Console.WriteLine("Invalid Employee Id");
+                return;
+            }
             company.PromoteEmployee(employeeid);
 
         }

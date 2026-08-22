@@ -5,7 +5,7 @@ namespace EmployeeManagementSystem.Models
     public class Employee
     {
         private readonly HashSet<string> Skills = new HashSet<string>();
-
+        public IEnumerable<string> Skill => Skills;
         public Employee(int id, int departmentId, string name, decimal salary, DateTime hireDate)
         {
             Id = id;

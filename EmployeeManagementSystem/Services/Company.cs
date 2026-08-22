@@ -383,6 +383,19 @@ namespace EmployeeManagementSystem.Services
                 Console.WriteLine(skill);
             }         
         }
+        public void ShowEmployeeSkills()
+        {
+            foreach(var employee in employees)
+            {
+                Console.WriteLine($"Name : {employee.Name}");
+                Console.Write($"Skills : ");
+                foreach (var skill in employee.Skill)
+                {
+                    Console.WriteLine($"{skill}  ");
+                }
+                Console.WriteLine();
+            }
+        }
         public void SeedData()
         {
 
