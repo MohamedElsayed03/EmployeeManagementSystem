@@ -8,30 +8,25 @@ namespace EmployeeManagementSystem.Common
 {
     public class Result<T>
     {
-        public bool Success { get; set; }
+        public bool Success { get; private set; }
 
-        public string Message { get; set; } = string.Empty;
+        public string Message { get; private set; } = string.Empty;
 
-        public T? Data { get; set; }
+        public T? Data { get; private set; }
 
+        private Result(bool success, string message, T? data)
+        {
+            Success = success;
+            Message = message;
+            Data = data;
+        }
         public static Result<T> Ok(T data, string message)
         {
-            return new Result<T>
-            {
-                Success = true,
-                Message = message,
-                Data = data
-            };
+            return new Result<T>(true, message, data);
         }
-
         public static Result<T> Fail(string message)
         {
-            return new Result<T>
-            {
-                Success = false,
-                Message = message,
-                Data = default
-            };
+            return new Result<T>(false, message, default);
         }
 
     }
